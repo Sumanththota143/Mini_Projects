@@ -1,26 +1,21 @@
 import random
 import os
 
-class Users:
-
-    def __init__(self, name):
+class users:
+    def __init__(self, name, account_id, password, balance):
         self.name = name
-        num = random.randint(1000, 9999)
-        self.acc_no = "500070" + str(num)
-        self.balance = 0
+        self.account_id = account_id
+        self.password = password
+        self.balance = balance
+        folder_path = "C:\\Users\\suman\\OneDrive\\Desktop\\my_codes\\git_clones\\Mini_Projects\\Bank_Account_Management\\users"
+        file_path = os.path.join(folder_path, str(self.account_id) + ".txt")
+        with open(file_path,"w") as f2:
+            f2.write(f"name: {self.name}\n")
+            f2.write(f"account id: {self.account_id}\n")
+            f2.write(f"password: {self.password}\n")
+            f2.write(f"balance: {self.balance}\n")
 
-    def show_details(self):
-        details = (f"name: {self.name}\n"
-        f"account number: {self.acc_no}\n"
-        f"balance: {self.balance}")
-        return details
 
-
-# Create object
-# user_1 = Users(input("Enter your name: "))
-
-# Display details
-# print(user_1.show_details())
 
 # main loop
 while True:
@@ -42,11 +37,21 @@ while True:
                     f1.write(f"WELCOME {name}")
 
             return user_id
-        acc_id = creating_user_id()
-        print(acc_id)
-        break
-            
+        account_id = creating_user_id()
+        print("your account id is: ",account_id)
+        def creating_pin():
+            pin = int(input("create your pin: "))
+            pin_check = int(input("re enter your pin: "))
+            if pin != pin_check:
+                print("password dosent match..\n")
+                creating_pin()
+            else:
+                return pin
+        password = creating_pin()
+        balance = 0
 
+        user = users(name,account_id,password,balance)
+        break
     else:
         print("Incorrect Entry!")
         break
